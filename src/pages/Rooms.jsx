@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from "../appWriteConfig"
 import { ID, Query } from "appwrite"
+import { Trash2 } from "react-feather"
 
 const Rooms = () => {
 
@@ -35,19 +36,21 @@ const Rooms = () => {
   const getMessages = async () => {
     const response = await databases.listDocuments(
       DATABASE_ID,
-       COLLECTION_ID_MESSAGES,
-       [
+      COLLECTION_ID_MESSAGES,
+      [
         Query.orderDesc("$createdAt"),
         Query.limit(5)
-       ]
-       )
+      ]
+    )
     console.log('RESPONSE:', response);
     setMessages(response.documents)
   }
 
-  const deleteMessage = async (message_id) =>
-  {
-     databases.deleteDocument(DATABASE_ID, COLLECTION_ID_MESSAGES, document_id)
+  const deleteMessage = async (message_id) => {
+    databases.deleteDocument(DATABASE_ID, COLLECTION_ID_MESSAGES, message_id)
+    setMessages(prevState => messages.filter(message => message.$id != message_id))
+
+
   }
 
   return (
@@ -57,7 +60,7 @@ const Rooms = () => {
         <form onSubmit={handleSubmit} id="message--form">
           <div>
             <textarea
-            maxLength='1000'
+              maxLength='1000'
               required
               placeholder="say something.."
               onChange={(e) => setMessageBody(e.target.value)}
@@ -73,7 +76,10 @@ const Rooms = () => {
           {messages.map(message => (
             <div key={message.$id} className="message--wrapper">
               <div className="messages--header">
-                <small className="message-timestamp">{message.$createdAt}</small>
+                <Trash2 
+                className="delete--btn"
+                onClick={() => { deleteMessage(message.$id) }} > </Trash2>
+                <small className="message-timestamp">{new Date (message.$createdAt).toLocaleString()}</small>
               </div>
               <div className="message--body">
                 <span>{message.body}</span>
