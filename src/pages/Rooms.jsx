@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from "../appWriteConfig"
+import client, {databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from "../appWriteConfig"
 import { ID, Query } from "appwrite"
 import { Trash2 } from "react-feather"
 
@@ -10,6 +10,11 @@ const Rooms = () => {
 
   useEffect(() => {
     getMessages()
+
+    client.subscribe(`databases.${DATABASE_ID}.collections.${COLLECTION_ID_MESSAGES}.documents`, response => {
+      // Callback will be executed on changes for documents A and all files.
+      console.log('REAL TIME:', response);
+  });
   }, [])
 
   const handleSubmit = async (e) => {
