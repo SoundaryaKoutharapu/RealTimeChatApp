@@ -95,7 +95,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 .btn--secondary{
   /* background-color: #8db3dd; */
   border-radius: 10px;
-  background-color:rgb(154, 174, 249);
+  background-color:rgb(170, 202, 74);
 }
 
 .btn:hover{
@@ -181,7 +181,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 }
 
 .delete--btn{
-  color:#8db3dd;
+  color:rgb(170, 202, 74);
   cursor: pointer;
   transition: 0.3s;
   width: 16px;
