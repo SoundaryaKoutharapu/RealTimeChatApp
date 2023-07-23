@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import client, { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from "../appWriteConfig"
 import { ID, Query } from "appwrite"
 import { Trash2 } from "react-feather"
+import Header from "../Components/Header"
 
 const Rooms = () => {
 
@@ -76,8 +77,8 @@ const Rooms = () => {
 
   return (
     <main className="container">
+      <Header/>
       <div className="room--container">
-
         <form onSubmit={handleSubmit} id="message--form">
           <div>
             <textarea

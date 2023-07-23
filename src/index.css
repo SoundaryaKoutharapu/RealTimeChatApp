@@ -88,14 +88,16 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 }
 
 .btn--main{
-  background-color: rgba(219,26,90,1);
-  color: #fff;
+  /* background-color: rgba(219,26,90,1); */
+  background-color: rgba(89, 172, 185, 0.575);;
+  color: #f4f6f8;
+  font-weight: bold;
 }
 
 .btn--secondary{
   /* background-color: #8db3dd; */
   border-radius: 10px;
-  background-color:rgb(170, 202, 74);
+  background-color:orange;
 }
 
 .btn:hover{
@@ -162,7 +164,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
   padding: 0.5em 0;
   color: var(--textColorSecondary);
   /* background-color: var(--themeColorMain); */
-  background-color: #38ad79;
+  background-color: #4da53e;
   padding: 1em;
   border-radius: 20px;
   width:fit-content;
@@ -181,7 +183,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 }
 
 .delete--btn{
-  color:rgb(170, 202, 74);
+  color:rgb(249, 247, 250);
   cursor: pointer;
   transition: 0.3s;
   width: 16px;
