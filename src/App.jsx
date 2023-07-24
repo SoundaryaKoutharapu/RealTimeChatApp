@@ -1,4 +1,3 @@
-import './App.css'
 import Rooms from './pages/Rooms'
 import LoginPage from './pages/LoginPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'

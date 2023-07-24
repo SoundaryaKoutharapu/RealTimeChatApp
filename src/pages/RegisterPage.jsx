@@ -64,7 +64,7 @@ const {handleUserRegister} = useAuth()
         </div>
 
         <div className="field--wrapper">
-          <input className="btn btn--main btn btn--lg" type="submit" value='Register' />
+          <button className="btn btn--main btn btn--lg" type="submit"> Register</button>
         </div>
 
       </form>

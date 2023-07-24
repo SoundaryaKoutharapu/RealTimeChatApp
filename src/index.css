@@ -97,7 +97,8 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 .btn--secondary{
   /* background-color: #8db3dd; */
   border-radius: 10px;
-  background-color:orange;
+  color: white;
+  background-color:rgb(151, 59, 71);
 }
 
 .btn:hover{

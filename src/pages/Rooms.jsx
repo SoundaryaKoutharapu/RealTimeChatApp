@@ -113,11 +113,11 @@ const Rooms = () => {
                   {message ?.username ? (
                     <span>{message.username}</span>
                   ): (<span>Anonymous User</span>)}
-                   <small className="message-timestamp">{new Date(message.$createdAt).toLocaleString()} </small>
                 </p>
                 <Trash2
                   className="delete--btn"
                   onClick={() => { deleteMessage(message.$id) }} > </Trash2>
+                  <small className="message-timestamp">{new Date(message.$createdAt).toLocaleString()} </small>
               </div>
               <div className="message--body">
                 <span>{message.body}</span>
