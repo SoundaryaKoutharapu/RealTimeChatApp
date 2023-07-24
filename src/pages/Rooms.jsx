@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react"
 import client, { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from "../appWriteConfig"
-import { ID, Query } from "appwrite"
+import { ID, Query, Role, Permission } from "appwrite"
 import { Trash2 } from "react-feather"
 import Header from "../Components/Header"
+import { useAuth } from "../utils/AuthContext"
 
 const Rooms = () => {
+
+  const { user } = useAuth()
 
   const [messages, setMessages] = useState([])
   const [messageBody, setMessageBody] = useState('')
@@ -28,24 +31,32 @@ const Rooms = () => {
 
     });
 
-          return () =>
-          {
-            unsubscribe();
-          } 
+    return () => {
+      unsubscribe();
+    }
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     let payload = {
+      user_id: user.$id,
+      username: user.name,
       body: messageBody
     }
+
+    let permissions = [
+
+        Permission.write(Role.user(user.$id))
+    ]
+
 
     let response = await databases.createDocument(
       DATABASE_ID,
       COLLECTION_ID_MESSAGES,
       ID.unique(),
-      payload
+      payload,
+      permissions
     )
 
     console.log('Created!', response);
@@ -77,7 +88,7 @@ const Rooms = () => {
 
   return (
     <main className="container">
-      <Header/>
+      <Header />
       <div className="room--container">
         <form onSubmit={handleSubmit} id="message--form">
           <div>
@@ -98,10 +109,15 @@ const Rooms = () => {
           {messages.map(message => (
             <div key={message.$id} className="message--wrapper">
               <div className="messages--header">
+                <p>
+                  {message ?.username ? (
+                    <span>{message.username}</span>
+                  ): (<span>Anonymous User</span>)}
+                   <small className="message-timestamp">{new Date(message.$createdAt).toLocaleString()} </small>
+                </p>
                 <Trash2
                   className="delete--btn"
                   onClick={() => { deleteMessage(message.$id) }} > </Trash2>
-                <small className="message-timestamp">{new Date(message.$createdAt).toLocaleString()}</small>
               </div>
               <div className="message--body">
                 <span>{message.body}</span>
